@@ -1,0 +1,12 @@
+<!-- swiper wrapper -->
+<div class="overflow-hidden w-full relative">
+  <ng-content select="[swiperHeader]" />
+
+  <!-- swiper -->
+  <div swiper [config]="config()" class="flex app-space-x">
+    <!-- slides -->
+    <ng-content select="[swiperItem]"></ng-content>
+  </div>
+
+  <ng-content select="[swiperFooter]" />
+</div>
