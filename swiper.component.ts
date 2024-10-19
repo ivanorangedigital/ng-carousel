@@ -4,17 +4,20 @@ import {
   contentChildren,
   input,
   viewChild,
-} from '@angular/core';
-import { SwiperItemDirective } from './directives/swiper-item.directive';
-import { SwiperInterface } from './interfaces/swiper.interface';
-import { SwiperDirective } from './directives/swiper.directive';
-import { SwiperService } from './swiper.service';
+} from "@angular/core";
+import { SwiperItemDirective } from "./directives/swiper-item.directive";
+import { SwiperInterface } from "./interfaces/swiper.interface";
+import { SwiperDirective } from "./directives/swiper.directive";
+import { SwiperService } from "./swiper.service";
 
 @Component({
-  templateUrl: './swiper.component.html',
-  selector: 'app-swiper',
+  templateUrl: "./swiper.component.html",
+  selector: "app-swiper",
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SwiperService],
+  host: {
+    class: "relative overflow-hidden block",
+  },
 })
 export class SwiperComponent {
   public readonly config = input.required<SwiperInterface>();

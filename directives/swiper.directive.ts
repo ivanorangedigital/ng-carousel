@@ -8,16 +8,16 @@ import {
   inject,
   input,
   signal,
-} from '@angular/core';
-import { SwiperInterface } from '../interfaces/swiper.interface';
-import { Subject, interval, takeUntil } from 'rxjs';
-import { animate } from 'motion';
-import { ScreenSizeEnum } from '../../../enums/screen-size.enum';
-import { WindowService } from '../../../../core/services/window.service';
-import { SwiperService } from '../swiper.service';
+} from "@angular/core";
+import { SwiperInterface } from "../interfaces/swiper.interface";
+import { Subject, interval, takeUntil } from "rxjs";
+import { animate } from "motion";
+import { WindowService } from "../../../../core/services/window.service";
+import { SwiperService } from "../swiper.service";
+import { ScreenSizeEnum } from "../../../enums/screen-size.enum";
 
 @Directive({
-  selector: '[swiper]',
+  selector: "[swiper]",
 })
 export class SwiperDirective implements OnDestroy, OnInit {
   public readonly config = input.required<SwiperInterface>();
@@ -92,7 +92,7 @@ export class SwiperDirective implements OnDestroy, OnInit {
           nodes.forEach((node) => {
             const matches = node.classList
               .toString()
-              .split(' ')
+              .split(" ")
               .reduce(
                 (acc, cls) => {
                   const matched = cls.match(/sm:*|md:*|lg:*|xl:*/);
@@ -102,7 +102,7 @@ export class SwiperDirective implements OnDestroy, OnInit {
                 <string[]>[],
               );
 
-            node.classList.remove('flex-1', 'hidden', ...matches);
+            node.classList.remove("flex-1", "hidden", ...matches);
           });
 
           // autoplay start
@@ -132,7 +132,7 @@ export class SwiperDirective implements OnDestroy, OnInit {
 
   private buildBreakpoints(nodes: HTMLElement[]): void {
     const breakpoints = {
-      '0': 0,
+      "0": 0,
       sm: 0,
       md: 0,
       lg: 0,
@@ -145,11 +145,11 @@ export class SwiperDirective implements OnDestroy, OnInit {
       const isbreakpoint = classList.match(/sm:*|md:*|lg:*|xl:*/);
 
       // slidesPerView for mobile
-      if (classList.match('flex-1') && !isbreakpoint) {
-        breakpoints['0']++;
+      if (classList.match("flex-1") && !isbreakpoint) {
+        breakpoints["0"]++;
         // breakpoints slide
       } else if (isbreakpoint) {
-        const key = isbreakpoint[0].split(':')[0] as 'sm' | 'md' | 'lg' | 'xl';
+        const key = isbreakpoint[0].split(":")[0] as "sm" | "md" | "lg" | "xl";
 
         if (!breakpoints[key]) {
           for (
@@ -170,11 +170,11 @@ export class SwiperDirective implements OnDestroy, OnInit {
     this.state.update((state) => ({
       ...state,
       breakpoints: {
-        [ScreenSizeEnum.ZERO]: breakpoints['0'],
-        [ScreenSizeEnum.SM]: breakpoints['sm'],
-        [ScreenSizeEnum.MD]: breakpoints['md'],
-        [ScreenSizeEnum.LG]: breakpoints['lg'],
-        [ScreenSizeEnum.XL]: breakpoints['xl'],
+        [ScreenSizeEnum.ZERO]: breakpoints["0"],
+        [ScreenSizeEnum.SM]: breakpoints["sm"],
+        [ScreenSizeEnum.MD]: breakpoints["md"],
+        [ScreenSizeEnum.LG]: breakpoints["lg"],
+        [ScreenSizeEnum.XL]: breakpoints["xl"],
       },
     }));
   }
@@ -208,7 +208,7 @@ export class SwiperDirective implements OnDestroy, OnInit {
       }
 
       // update state
-      this.update$.next('left');
+      this.update$.next("left");
 
       // increase index by 1
       index++;
@@ -258,7 +258,7 @@ export class SwiperDirective implements OnDestroy, OnInit {
       }
 
       // update state
-      this.update$.next('right');
+      this.update$.next("right");
 
       index--;
 
@@ -325,7 +325,7 @@ export class SwiperDirective implements OnDestroy, OnInit {
       {
         x: `-${value}px`,
       },
-      { duration: duration ?? 0.6, easing: 'ease-in-out' },
+      { duration: duration ?? 0.6, easing: "ease-in-out" },
     ).finished.then((res) => {
       if (res && duration !== 0) {
         this.isRunning = false;
@@ -335,7 +335,7 @@ export class SwiperDirective implements OnDestroy, OnInit {
 
   private set spaceXValue(value: number) {
     this.swiperContainer.nativeElement.style.setProperty(
-      '--app-space-x-value',
+      "--app-space-x-value",
       `${value}px`,
     );
   }
